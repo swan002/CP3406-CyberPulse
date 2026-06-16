@@ -8,9 +8,9 @@ It provides the structure for a simple tabular UI using **Jetpack Compose** and 
 ## Getting Started
 
 ### How to Run
-1. Clone or download this repo  
-2. Open in Android Studio  
-3. Run on an emulator or physical device (API 26+ recommended)  
+1. Clone or download this repo
+2. Open in Android Studio
+3. Run on an emulator or physical device (API 26+ recommended)
 
 ---
 
@@ -21,12 +21,12 @@ It provides the structure for a simple tabular UI using **Jetpack Compose** and 
 - Toggles content between Utility and Settings
 
 ### UtilityScreen()
-- Displays a simple counter (replace with your utility logic)  
+- Displays a simple counter (replace with your utility logic)
 - Includes a button to increment the counter
 
 ### SettingsScreen()
-- Placeholder for user preferences or configuration  
-- Can be extended to modify main screen behavior (e.g., theme, units, limits)  
+- Placeholder for user preferences or configuration
+- Can be extended to modify main screen behavior (e.g., theme, units, limits)
 
 ---
 
@@ -43,10 +43,10 @@ It provides the structure for a simple tabular UI using **Jetpack Compose** and 
 ---
 
 ## Suggested Extensions
-- Replace counter with a real utility (e.g., hydration tracker, timer)  
-- Add a ViewModel for state management  
-- Use SharedPreferences or DataStore to persist settings  
-- Add a simple API call using Retrofit (e.g., fetch weather or quotes)  
+- Replace counter with a real utility (e.g., hydration tracker, timer)
+- Add a ViewModel for state management
+- Use SharedPreferences or DataStore to persist settings
+- Add a simple API call using Retrofit (e.g., fetch weather or quotes)
 
 ---
 
