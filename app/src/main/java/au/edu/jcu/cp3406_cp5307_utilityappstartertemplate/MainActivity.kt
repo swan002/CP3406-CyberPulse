@@ -33,6 +33,7 @@ import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.ui.theme.CP3406_CP5603
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,8 +92,54 @@ fun UtilityApp() {
     }
 }
 
+data class CyberAlert(
+    val title: String,
+    val category: String,
+    val severity: String,
+    val source: String
+)
+
 @Composable
 fun UtilityScreen(alertCount: Int, category: String) {
+    val alerts = listOf(
+        CyberAlert(
+            "Critical vulnerability reported in widely used software.",
+            "Vulnerabilities",
+            "Medium",
+            "Cybersecurity News"
+        ),
+        CyberAlert(
+            "New malware campaign targets Android users.",
+            "Malware",
+            "High",
+            "Threat Monitor"
+        ),
+        CyberAlert(
+            "Large data breach exposes customer records.",
+            "Data Breach",
+            "High",
+            "Security Weekly"
+        ),
+        CyberAlert(
+            "Phishing emails increase during exam season.",
+            "Malware",
+            "Medium",
+            "Cyber Awareness Feed"
+        ),
+        CyberAlert(
+            "Security update released for common web framework.",
+            "Vulnerabilities",
+            "Low",
+            "Developer Security News"
+        )
+    )
+
+    val filteredAlerts = if (category == "All") {
+        alerts
+    } else {
+        alerts.filter { it.category == category }
+    }.take(alertCount)
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -109,25 +156,29 @@ fun UtilityScreen(alertCount: Int, category: String) {
             style = MaterialTheme.typography.bodyLarge
         )
 
-        Card(
-            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+        Text(
+            text = "Selected category: $category",
+            style = MaterialTheme.typography.bodyMedium
+        )
+
+        filteredAlerts.forEach { alert ->
+            Card(
+                elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
             ) {
-                Text("Threat Level: Medium", style = MaterialTheme.typography.titleLarge)
-                Text("Latest Alert", style = MaterialTheme.typography.titleMedium)
-                Text("Critical vulnerability reported in widely used software.")
-                Text("Category: Vulnerability")
-                Text("Source: Cybersecurity News")
-                Text("Alerts shown: $alertCount")
-                Text("Selected category: $category")
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text("Threat Level: ${alert.severity}", style = MaterialTheme.typography.titleLarge)
+                    Text(alert.title, style = MaterialTheme.typography.titleMedium)
+                    Text("Category: ${alert.category}")
+                    Text("Source: ${alert.source}")
+                }
             }
         }
 
         Button(onClick = { }) {
-            Text("Refresh Alert")
+            Text("Refresh Alerts")
         }
     }
 }
