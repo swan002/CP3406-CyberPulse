@@ -101,38 +101,8 @@ data class CyberAlert(
 
 @Composable
 fun UtilityScreen(alertCount: Int, category: String) {
-    val alerts = listOf(
-        CyberAlert(
-            "Critical vulnerability reported in widely used software.",
-            "Vulnerabilities",
-            "Medium",
-            "Cybersecurity News"
-        ),
-        CyberAlert(
-            "New malware campaign targets Android users.",
-            "Malware",
-            "High",
-            "Threat Monitor"
-        ),
-        CyberAlert(
-            "Large data breach exposes customer records.",
-            "Data Breach",
-            "High",
-            "Security Weekly"
-        ),
-        CyberAlert(
-            "Phishing emails increase during exam season.",
-            "Malware",
-            "Medium",
-            "Cyber Awareness Feed"
-        ),
-        CyberAlert(
-            "Security update released for common web framework.",
-            "Vulnerabilities",
-            "Low",
-            "Developer Security News"
-        )
-    )
+    val repository = CyberNewsRepository()
+    val alerts = repository.getAlerts()
 
     val filteredAlerts = if (category == "All") {
         alerts
