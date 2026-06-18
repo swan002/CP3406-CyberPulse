@@ -55,6 +55,8 @@ fun UtilityAppPreview() {
 @Composable
 fun UtilityApp() {
     var selectedTab by remember { mutableStateOf("Utility") }
+    var alertCount by remember { mutableIntStateOf(1) }
+    var category by remember { mutableStateOf("All") }
 
     Scaffold(
         bottomBar = {
@@ -76,15 +78,20 @@ fun UtilityApp() {
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
             when (selectedTab) {
-                "Utility" -> UtilityScreen()
-                "Settings" -> SettingsScreen()
+                "Utility" -> UtilityScreen(alertCount, category)
+                "Settings" -> SettingsScreen(
+                    alertCount = alertCount,
+                    onAlertCountChange = { alertCount = it },
+                    category = category,
+                    onCategoryChange = { category = it }
+                )
             }
         }
     }
 }
 
 @Composable
-fun UtilityScreen() {
+fun UtilityScreen(alertCount: Int, category: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -113,6 +120,8 @@ fun UtilityScreen() {
                 Text("Critical vulnerability reported in widely used software.")
                 Text("Category: Vulnerability")
                 Text("Source: Cybersecurity News")
+                Text("Alerts shown: $alertCount")
+                Text("Selected category: $category")
             }
         }
 
@@ -123,40 +132,52 @@ fun UtilityScreen() {
 }
 
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(
+    alertCount: Int,
+    onAlertCountChange: (Int) -> Unit,
+    category: String,
+    onCategoryChange: (String) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text(
-            text = "Settings",
-            style = MaterialTheme.typography.headlineMedium
-        )
+        Text("Settings", style = MaterialTheme.typography.headlineMedium)
 
-        Text(
-            text = "Number of Alerts",
-            style = MaterialTheme.typography.titleMedium
-        )
+        Text("Number of Alerts", style = MaterialTheme.typography.titleMedium)
 
-        Text("1 Alert")
-        Text("3 Alerts")
-        Text("5 Alerts")
+        Button(onClick = { onAlertCountChange(1) }) {
+            Text("1 Alert")
+        }
 
-        Text(
-            text = "Category",
-            style = MaterialTheme.typography.titleMedium
-        )
+        Button(onClick = { onAlertCountChange(3) }) {
+            Text("3 Alerts")
+        }
 
-        Text("All")
-        Text("Malware")
-        Text("Data Breach")
-        Text("Vulnerabilities")
+        Button(onClick = { onAlertCountChange(5) }) {
+            Text("5 Alerts")
+        }
 
-        Text(
-            text = "Dark Mode: Off",
-            style = MaterialTheme.typography.bodyLarge
-        )
+        Text("Category", style = MaterialTheme.typography.titleMedium)
+
+        Button(onClick = { onCategoryChange("All") }) {
+            Text("All")
+        }
+
+        Button(onClick = { onCategoryChange("Malware") }) {
+            Text("Malware")
+        }
+
+        Button(onClick = { onCategoryChange("Data Breach") }) {
+            Text("Data Breach")
+        }
+
+        Button(onClick = { onCategoryChange("Vulnerabilities") }) {
+            Text("Vulnerabilities")
+        }
+
+        Text("Current Settings: $alertCount alert(s), $category")
     }
 }
