@@ -4,6 +4,6 @@ import retrofit2.http.GET
 
 interface CyberNewsService {
 
-    @GET("v2/top-headlines?category=technology&country=us")
+    @GET("search?query=cybersecurity")
     suspend fun getNews(): NewsResponse
 }
