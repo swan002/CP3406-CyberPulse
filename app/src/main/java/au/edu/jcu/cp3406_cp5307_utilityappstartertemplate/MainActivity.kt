@@ -30,7 +30,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.ui.theme.CP3406_CP5603UtilityAppStarterTemplateTheme
-
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,28 +101,20 @@ fun UtilityScreen() {
             style = MaterialTheme.typography.bodyLarge
         )
 
-        Text(
-            text = "Threat Level: Medium",
-            style = MaterialTheme.typography.titleLarge
-        )
-
-        Text(
-            text = "Latest Alert",
-            style = MaterialTheme.typography.titleMedium
-        )
-
-        Text(
-            text = "Critical vulnerability reported in widely used software.",
-            style = MaterialTheme.typography.bodyLarge
-        )
-
-        Text(
-            text = "Category: Vulnerability"
-        )
-
-        Text(
-            text = "Source: Cybersecurity News"
-        )
+        Card(
+            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text("Threat Level: Medium", style = MaterialTheme.typography.titleLarge)
+                Text("Latest Alert", style = MaterialTheme.typography.titleMedium)
+                Text("Critical vulnerability reported in widely used software.")
+                Text("Category: Vulnerability")
+                Text("Source: Cybersecurity News")
+            }
+        }
 
         Button(onClick = { }) {
             Text("Refresh Alert")
