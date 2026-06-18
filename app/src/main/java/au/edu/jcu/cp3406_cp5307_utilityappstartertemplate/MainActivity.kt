@@ -32,7 +32,8 @@ import androidx.compose.ui.unit.dp
 import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.ui.theme.CP3406_CP5603UtilityAppStarterTemplateTheme
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-
+import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.layout.Row
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -132,6 +133,13 @@ fun UtilityScreen(alertCount: Int, category: String) {
         )
 
         filteredAlerts.forEach { alert ->
+
+            val severityColor = when (alert.severity) {
+                "High" -> Color.Red
+                "Medium" -> Color(0xFFFF9800)
+                else -> Color(0xFF4CAF50)
+            }
+
             Card(
                 elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
             ) {
@@ -139,8 +147,18 @@ fun UtilityScreen(alertCount: Int, category: String) {
                     modifier = Modifier.padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text("Threat Level: ${alert.severity}", style = MaterialTheme.typography.titleLarge)
-                    Text(alert.title, style = MaterialTheme.typography.titleMedium)
+
+                    Text(
+                        text = "● ${alert.severity.uppercase()}",
+                        color = severityColor,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+
+                    Text(
+                        text = alert.title,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+
                     Text("Category: ${alert.category}")
                     Text("Source: ${alert.source}")
                 }
