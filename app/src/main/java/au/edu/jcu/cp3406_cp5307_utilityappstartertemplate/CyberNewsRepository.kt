@@ -2,6 +2,23 @@ package au.edu.jcu.cp3406_cp5307_utilityappstartertemplate
 
 class CyberNewsRepository {
 
+    suspend fun getRemoteAlerts(): List<CyberAlert> {
+        return try {
+            val response = RetrofitClient.cyberNewsService.getNews()
+
+            response.hits.take(5).map { article ->
+                CyberAlert(
+                    title = article.title ?: "Cybersecurity update",
+                    category = "Cybersecurity",
+                    severity = "Medium",
+                    source = article.author ?: "Hacker News"
+                )
+            }
+        } catch (e: Exception) {
+            getAlerts()
+        }
+    }
+
     fun getAlerts(): List<CyberAlert> {
         return listOf(
             CyberAlert(
