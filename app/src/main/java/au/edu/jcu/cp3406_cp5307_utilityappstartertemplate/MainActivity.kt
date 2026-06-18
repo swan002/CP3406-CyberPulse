@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import au.edu.jcu.cp3406_cp5307_utilityappstartertemplate.ui.theme.CP3406_CP5603UtilityAppStarterTemplateTheme
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
