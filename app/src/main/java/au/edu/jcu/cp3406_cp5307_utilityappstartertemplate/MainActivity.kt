@@ -1,3 +1,4 @@
+
 package au.edu.jcu.cp3406_cp5307_utilityappstartertemplate
 
 import android.os.Bundle
@@ -83,19 +84,47 @@ fun UtilityApp() {
 
 @Composable
 fun UtilityScreen() {
-    var counter by remember { mutableIntStateOf(0) }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text("Utility Screen", style = MaterialTheme.typography.headlineMedium)
-        Text("Counter: $counter", style = MaterialTheme.typography.bodyLarge)
+        Text(
+            text = "Cyber Pulse",
+            style = MaterialTheme.typography.headlineMedium
+        )
 
-        Button(onClick = { counter++ }) {
-            Text("Increment")
+        Text(
+            text = "At-a-glance cybersecurity threat alerts",
+            style = MaterialTheme.typography.bodyLarge
+        )
+
+        Text(
+            text = "Threat Level: Medium",
+            style = MaterialTheme.typography.titleLarge
+        )
+
+        Text(
+            text = "Latest Alert",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        Text(
+            text = "Critical vulnerability reported in widely used software.",
+            style = MaterialTheme.typography.bodyLarge
+        )
+
+        Text(
+            text = "Category: Vulnerability"
+        )
+
+        Text(
+            text = "Source: Cybersecurity News"
+        )
+
+        Button(onClick = { }) {
+            Text("Refresh Alert")
         }
     }
 }
@@ -103,11 +132,38 @@ fun UtilityScreen() {
 @Composable
 fun SettingsScreen() {
     Column(
-        Modifier
+        modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp), Arrangement.spacedBy(16.dp)
+            .padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text("Settings Screen", style = MaterialTheme.typography.headlineMedium)
-        Text("This is where you can add toggles or preferences.")
+        Text(
+            text = "Settings",
+            style = MaterialTheme.typography.headlineMedium
+        )
+
+        Text(
+            text = "Number of Alerts",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        Text("1 Alert")
+        Text("3 Alerts")
+        Text("5 Alerts")
+
+        Text(
+            text = "Category",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        Text("All")
+        Text("Malware")
+        Text("Data Breach")
+        Text("Vulnerabilities")
+
+        Text(
+            text = "Dark Mode: Off",
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
 }
