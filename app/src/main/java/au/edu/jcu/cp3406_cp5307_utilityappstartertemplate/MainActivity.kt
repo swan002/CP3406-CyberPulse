@@ -34,6 +34,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -184,40 +185,101 @@ fun SettingsScreen(
             .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text("Settings", style = MaterialTheme.typography.headlineMedium)
 
-        Text("Number of Alerts", style = MaterialTheme.typography.titleMedium)
+        Text(
+            text = "Settings",
+            style = MaterialTheme.typography.headlineMedium
+        )
 
-        Button(onClick = { onAlertCountChange(1) }) {
-            Text("1 Alert")
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+
+                Text(
+                    "Number of Alerts",
+                    style = MaterialTheme.typography.titleMedium
+                )
+
+                Button(
+                    onClick = { onAlertCountChange(1) }
+                ) {
+                    Text(if (alertCount == 1) "✓ 1 Alert" else "1 Alert")
+                }
+
+                Button(
+                    onClick = { onAlertCountChange(3) }
+                ) {
+                    Text(if (alertCount == 3) "✓ 3 Alerts" else "3 Alerts")
+                }
+
+                Button(
+                    onClick = { onAlertCountChange(5) }
+                ) {
+                    Text(if (alertCount == 5) "✓ 5 Alerts" else "5 Alerts")
+                }
+            }
         }
 
-        Button(onClick = { onAlertCountChange(3) }) {
-            Text("3 Alerts")
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+
+                Text(
+                    "Category",
+                    style = MaterialTheme.typography.titleMedium
+                )
+
+                Button(
+                    onClick = { onCategoryChange("All") }
+                ) {
+                    Text(if (category == "All") "✓ All" else "All")
+                }
+
+                Button(
+                    onClick = { onCategoryChange("Malware") }
+                ) {
+                    Text(if (category == "Malware") "✓ Malware" else "Malware")
+                }
+
+                Button(
+                    onClick = { onCategoryChange("Data Breach") }
+                ) {
+                    Text(if (category == "Data Breach") "✓ Data Breach" else "Data Breach")
+                }
+
+                Button(
+                    onClick = { onCategoryChange("Vulnerabilities") }
+                ) {
+                    Text(if (category == "Vulnerabilities") "✓ Vulnerabilities" else "Vulnerabilities")
+                }
+            }
         }
 
-        Button(onClick = { onAlertCountChange(5) }) {
-            Text("5 Alerts")
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = "Current Settings",
+                    style = MaterialTheme.typography.titleMedium
+                )
+
+                Text("Alerts: $alertCount")
+                Text("Category: $category")
+            }
         }
-
-        Text("Category", style = MaterialTheme.typography.titleMedium)
-
-        Button(onClick = { onCategoryChange("All") }) {
-            Text("All")
-        }
-
-        Button(onClick = { onCategoryChange("Malware") }) {
-            Text("Malware")
-        }
-
-        Button(onClick = { onCategoryChange("Data Breach") }) {
-            Text("Data Breach")
-        }
-
-        Button(onClick = { onCategoryChange("Vulnerabilities") }) {
-            Text("Vulnerabilities")
-        }
-
-        Text("Current Settings: $alertCount alert(s), $category")
     }
 }
