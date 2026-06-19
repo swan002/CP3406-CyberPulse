@@ -6,14 +6,23 @@ class CyberNewsRepository {
         return try {
             val response = RetrofitClient.cyberNewsService.getNews()
 
-            response.hits.take(5).map { article ->
-                CyberAlert(
-                    title = article.title ?: "Cybersecurity update",
-                    category = "Cybersecurity",
-                    severity = "Medium",
-                    source = article.author ?: "Hacker News"
-                )
-            }
+            response.hits
+                .filter { !it.title.isNullOrBlank() }
+                .take(10)
+                .map { article ->
+                    CyberAlert(
+                        title = article.title ?: "Cybersecurity update",
+                        category = "Cybersecurity",
+                        severity = when {
+                            article.title?.contains("breach", true) == true -> "High"
+                            article.title?.contains("attack", true) == true -> "High"
+                            article.title?.contains("malware", true) == true -> "High"
+                            article.title?.contains("vulnerability", true) == true -> "Medium"
+                            else -> "Low"
+                        },
+                        source = article.author ?: "Hacker News"
+                    )
+                }
         } catch (e: Exception) {
             getAlerts()
         }
