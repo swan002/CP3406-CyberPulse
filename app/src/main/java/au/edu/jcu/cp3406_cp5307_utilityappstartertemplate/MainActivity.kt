@@ -1,4 +1,3 @@
-
 package au.edu.jcu.cp3406_cp5307_utilityappstartertemplate
 
 import android.os.Bundle
@@ -148,6 +147,24 @@ fun UtilityScreen(
             text = "Selected category: $category",
             style = MaterialTheme.typography.bodyMedium
         )
+
+        Card(
+            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = "🛡 Threat Overview",
+                    style = MaterialTheme.typography.titleLarge
+                )
+
+                Text("Alerts Loaded: ${alerts.size}")
+                Text("Category: $category")
+                Text("Status: Live Feed Connected")
+            }
+        }
 
         filteredAlerts.forEach { alert ->
 
