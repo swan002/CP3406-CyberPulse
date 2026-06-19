@@ -61,7 +61,7 @@ fun UtilityAppPreview() {
 
 @Composable
 fun UtilityApp(viewModel: CyberPulseViewModel = viewModel()) {
-    var selectedTab by remember { mutableStateOf("Utility") }
+    var selectedTab by remember { mutableStateOf("Dashboard") }
 
     val alerts by viewModel.alerts.collectAsState()
     val alertCount by viewModel.alertCount.collectAsState()
@@ -72,10 +72,10 @@ fun UtilityApp(viewModel: CyberPulseViewModel = viewModel()) {
         bottomBar = {
             NavigationBar {
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Home, contentDescription = "Utility") },
-                    label = { Text("Utility") },
-                    selected = selectedTab == "Utility",
-                    onClick = { selectedTab = "Utility" }
+                    icon = { Icon(Icons.Default.Home, contentDescription = "Dashboard") },
+                    label = { Text("Dashboard") },
+                    selected = selectedTab == "Dashboard",
+                    onClick = { selectedTab = "Dashboard" }
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Settings, contentDescription = "Settings") },
@@ -88,7 +88,7 @@ fun UtilityApp(viewModel: CyberPulseViewModel = viewModel()) {
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
             when (selectedTab) {
-                "Utility" -> UtilityScreen(
+                "Dashboard" -> UtilityScreen(
                     alertCount = alertCount,
                     category = category,
                     alerts = alerts,
@@ -137,7 +137,7 @@ fun UtilityScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
-            text = "Cyber Pulse",
+            text = "🛡 Cyber Pulse",
             style = MaterialTheme.typography.headlineMedium
         )
 
