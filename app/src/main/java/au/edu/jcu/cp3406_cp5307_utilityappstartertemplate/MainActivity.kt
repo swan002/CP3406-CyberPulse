@@ -35,6 +35,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,10 +59,13 @@ fun UtilityAppPreview() {
 }
 
 @Composable
-fun UtilityApp() {
+fun UtilityApp(viewModel: CyberPulseViewModel = viewModel()) {
     var selectedTab by remember { mutableStateOf("Utility") }
-    var alertCount by remember { mutableIntStateOf(1) }
-    var category by remember { mutableStateOf("All") }
+
+    val alerts by viewModel.alerts.collectAsState()
+    val alertCount by viewModel.alertCount.collectAsState()
+    val category by viewModel.category.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
 
     Scaffold(
         bottomBar = {
@@ -82,12 +87,19 @@ fun UtilityApp() {
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
             when (selectedTab) {
-                "Utility" -> UtilityScreen(alertCount, category)
+                "Utility" -> UtilityScreen(
+                    alertCount = alertCount,
+                    category = category,
+                    alerts = alerts,
+                    isLoading = isLoading,
+                    onRefresh = { viewModel.refreshAlerts() }
+                )
+
                 "Settings" -> SettingsScreen(
                     alertCount = alertCount,
-                    onAlertCountChange = { alertCount = it },
+                    onAlertCountChange = { viewModel.updateAlertCount(it) },
                     category = category,
-                    onCategoryChange = { category = it }
+                    onCategoryChange = { viewModel.updateCategory(it) }
                 )
             }
         }
@@ -102,9 +114,13 @@ data class CyberAlert(
 )
 
 @Composable
-fun UtilityScreen(alertCount: Int, category: String) {
-    val repository = CyberNewsRepository()
-    val alerts = repository.getAlerts()
+fun UtilityScreen(
+    alertCount: Int,
+    category: String,
+    alerts: List<CyberAlert>,
+    isLoading: Boolean,
+    onRefresh: () -> Unit
+) {
 
     val filteredAlerts = if (category == "All") {
         alerts
@@ -166,8 +182,8 @@ fun UtilityScreen(alertCount: Int, category: String) {
             }
         }
 
-        Button(onClick = { }) {
-            Text("Refresh Alerts")
+        Button(onClick = onRefresh) {
+            Text(if (isLoading) "Loading..." else "Refresh Alerts")
         }
     }
 }
