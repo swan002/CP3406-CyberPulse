@@ -148,6 +148,13 @@ fun UtilityScreen(
             style = MaterialTheme.typography.bodyMedium
         )
 
+        if (isLoading) {
+            Text(
+                text = "Loading latest cyber alerts...",
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+
         Card(
             elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
         ) {
@@ -163,6 +170,19 @@ fun UtilityScreen(
                 Text("Alerts Loaded: ${alerts.size}")
                 Text("Category: $category")
                 Text("Status: Live Feed Connected")
+                Text("Source: Cyber News API")
+            }
+        }
+
+        if (filteredAlerts.isEmpty()) {
+            Card(
+                elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Text("No alerts found for selected category.")
+                }
             }
         }
 
