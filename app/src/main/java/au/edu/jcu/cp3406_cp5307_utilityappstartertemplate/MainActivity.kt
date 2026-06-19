@@ -171,6 +171,7 @@ fun UtilityScreen(
                 )
 
                 Text("Alerts Loaded: ${alerts.size}")
+                Text("Displaying: ${filteredAlerts.size} alert(s)")
                 Text("Category: $category")
                 Text("Status: Live Feed Connected")
                 Text("Source: Cyber News API")
