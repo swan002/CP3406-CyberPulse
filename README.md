@@ -111,4 +111,4 @@ Swan Htet Zaw
 
 James Cook University Singapore
 
-CP3406 Mobile Technologies
+CP3406 Mobile Computing
