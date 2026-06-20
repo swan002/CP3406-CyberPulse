@@ -1,31 +1,33 @@
 # Cyber Pulse
 
-Cyber Pulse is a cybersecurity utility dashboard developed using Kotlin and Jetpack Compose. The application provides real-time cybersecurity news and threat information through a clean and user-friendly dashboard.
+Cyber Pulse is a cybersecurity utility dashboard developed using Kotlin and Jetpack Compose. The application provides users with real-time cybersecurity news, threat information, and security alerts through a simple and intuitive interface.
 
 ## Features
 
 * Live cybersecurity news feed
 * Threat overview dashboard
-* Threat severity classification (High, Medium, Low)
-* Alert filtering and category selection
+* Automatic threat severity classification (High, Medium, Low)
+* Alert filtering by category
 * Adjustable number of displayed alerts
-* Real-time data retrieval using Retrofit
+* Real-time data refresh
 * Material Design 3 user interface
+* Settings management
 
 ## Technologies Used
 
 * Kotlin
 * Jetpack Compose
 * Material Design 3
+* Android SDK
 * ViewModel
 * StateFlow
 * Repository Pattern
 * Retrofit
-* Android SDK
+* Gson Converter
 
 ## Architecture
 
-UI (Compose)
+UI (Jetpack Compose)
 
 ↓
 
@@ -47,18 +49,61 @@ Cyber News API
 
 ### Dashboard
 
-Displays cybersecurity alerts, threat severity, and threat overview information.
+The dashboard displays live cybersecurity alerts, threat severity levels, and a threat overview summary. Users can quickly review the latest cybersecurity developments at a glance.
 
 ### Settings
 
-Allows users to configure alert count and alert category preferences.
+The settings screen allows users to customise the number of alerts displayed and manage alert category preferences.
+
+## Screenshots
+
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### Settings
+
+![Settings](screenshots/settings.png)
+
+## Key Functionality
+
+### Threat Overview
+
+* Displays the total number of alerts loaded
+* Shows the currently selected category
+* Indicates API connection status
+* Provides an overview of current cybersecurity activity
+
+### Alert Classification
+
+Cyber Pulse automatically classifies alerts into:
+
+* High Severity
+* Medium Severity
+* Low Severity
+
+Classification is performed using cybersecurity-related keywords found within article titles.
+
+### Real-Time News Feed
+
+The application retrieves cybersecurity news articles through a remote API connection and updates the dashboard with the latest available information.
+
+### Alert Filtering
+
+Users can customise their dashboard experience by:
+
+* Selecting the number of displayed alerts
+* Filtering alerts by category
+* Refreshing alerts on demand
 
 ## Future Improvements
 
-* Dark mode support
-* Notification system
+* Dark Mode support
+* Push notification alerts
 * Additional cyber threat intelligence sources
-* Bookmarking important alerts
+* Bookmarking and saved alerts
+* Search functionality
+* Offline data caching
 
 ## Author
 
